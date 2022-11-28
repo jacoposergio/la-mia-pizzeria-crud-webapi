@@ -17,7 +17,7 @@ namespace la_mia_pizzeria_static.Controllers
     public class PizzaController : Controller
     {
 
-        PizzeriaDbContext db;
+        public PizzeriaDbContext db;
 
         //Uso il repository al posto del db
         //DbPizzeriaRepository pizzaRepository;
@@ -30,14 +30,14 @@ namespace la_mia_pizzeria_static.Controllers
 
         IPizzeriaRepository pizzaRepository;   // 2 classi che non hanno vincolo di ereditarietà che implementano entrambi l'interfaccia
         // con la stessa aria di memoria posso avere 2 comportamenti diversi, uno sulla lista , uno sul db
-        public PizzaController(IPizzeriaRepository _pizzeriaRepository) : base() 
+        public PizzaController(IPizzeriaRepository _pizzaRepository) : base() 
         {
             db = new PizzeriaDbContext();
 
             //dependency injection, il controller
             //viene inizializzato con repository adatto alla situazione
-            pizzaRepository = _pizzeriaRepository;
-            pizzaRepository = new ListPizzeriaRepository();
+            pizzaRepository = _pizzaRepository;
+            //pizzaRepository = new ListPizzeriaRepository();
         }
 
         public IActionResult Index()

@@ -7,7 +7,7 @@ namespace la_mia_pizzeria_static.Models.Repositories
     {
         //se non abbiamo più il server lavoreremo su questa lista di post
         public static List<Pizza> Pizze = new List<Pizza>();
-        public static List<Category> Categories = new List<Category>();
+        //public static List<Category> Categories = new List<Category>();
         //public static List<Ingredient> Ingredients = new List<Ingredient>();
 
         public ListPizzeriaRepository()
