@@ -18,8 +18,9 @@ namespace la_mia_pizzeria_static.Controllers.Api
         public ActionResult Get()
         {
             List<Pizza> pizze = _pizzaRepository.All(); //lavora sui model, quindi sui dati 
-            return Ok(pizze);  
+            return Ok(pizze);   //le funzioni di restituzione convertono automaticamente in Json
             //in questo modo abbiamo recuperato i dati
+
         }
     }
 }

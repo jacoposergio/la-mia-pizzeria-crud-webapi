@@ -1,10 +1,10 @@
-﻿@*@{
+﻿@{
     Layout = "_GuestLayout";
-}*@
+}
 
 <div class="row js_no_post text-center d-none">
     <div class="col-12">
-        <h3>Non hai inserito alcun post</h3>
+        <h3>Non è presente alcuna pizza</h3>
     </div>
 </div>
 <div class="row js_post_table d-none">
@@ -15,24 +15,27 @@
 
 <script type="text/javascript">
 
-    axios.get('/api/post/get').then(res =>{
-        if (res.data.length == 0) {
+    axios.get('/api/pizza/get').then(res =>{
+        //se la lunghezza è = a 0, le pizze non esistono
+        if (res.data.length == 0) {   // response ci da tutta la risposta di axios, per lavorare sui nostri dati dobbiamo ragionare su response.data
             document.querySelector('.js_no_post').classList.remove('d-none');
             document.querySelector('.js_post_table').classList.add('d-none');
+            
+            //else nascondiamo il post 'non ci sono pizze' e mostriamo gli elementi
         } else {
             document.querySelector('.js_post_table').classList.remove('d-none');
             document.querySelector('.js_no_post').classList.add('d-none');
             document.querySelector('.js_post_table').innerHTML = '';
-            res.data.forEach(post => {
-                console.log('post', post);
+            res.data.forEach(pizza => {
+                console.log('pizza', pizza);
                 document.querySelector('.js_post_table').innerHTML +=
                     `
                                                     <div class="col-12 col-md-4 p-2">
                                 <div class="card post h-100">
-                                  <img src="${post.image}" class="card-img-top" alt="...">
+                                  <img src="${pizza.image}" class="card-img-top" alt="...">
                                   <div class="card-body">
-                                    <h5 class="card-title">${post.title}</h5>
-                                    <p class="card-text">${post.description}</p>
+                                    <h5 class="card-title">${pizza.name}</h5>
+                                    <p class="card-text">${pizza.description}</p>
                                   </div>
                                 </div>
                             </div>
