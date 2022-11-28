@@ -11,14 +11,17 @@ namespace la_mia_pizzeria_static.Controllers.Api
     {
         IPizzeriaRepository _pizzaRepository;
 
-        public PizzaController(IPizzeriaRepository pizzaRepository)
+        public PizzaController(IPizzeriaRepository pizzaRepository) //diciamo al controller come si deve inizializzare
         {
             _pizzaRepository = pizzaRepository;
         }
-        public ActionResult Get()
+        public ActionResult Get() //get va a recuperare le nostre pizze
         {
             List<Pizza> pizze = _pizzaRepository.All(); //lavora sui model, quindi sui dati 
-            return Ok(pizze);   //le funzioni di restituzione convertono automaticamente in Json
+            return Ok(pizze);   //restituisce json nella response body con codice 200
+            
+            
+            //le funzioni di restituzione convertono automaticamente in Json
             //in questo modo abbiamo recuperato i dati
 
         }
