@@ -6,28 +6,12 @@ namespace la_mia_pizzeria_static.Controllers
 {
     public class GuestController : Controller
     {
-        private readonly ILogger<GuestController> _logger;
-
-        public GuestController(ILogger<GuestController> logger)
-        {
-            _logger = logger;
-        }
-
+        //si occupa soltanto di presentarci le navigazioni
         public IActionResult Index()
         {
             ViewData["title"] = "Home";
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

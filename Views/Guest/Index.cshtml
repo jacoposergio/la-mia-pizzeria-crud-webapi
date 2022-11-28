@@ -2,6 +2,8 @@
     Layout = "_GuestLayout";
 }
 
+<h2>Le nostre pizze</h2>
+<hr />
 <div class="row js_no_post text-center d-none">
     <div class="col-12">
         <h3>Non è presente alcuna pizza</h3>
@@ -27,19 +29,30 @@
             document.querySelector('.js_no_post').classList.add('d-none');
             document.querySelector('.js_post_table').innerHTML = '';
             res.data.forEach(pizza => {
-                console.log('pizza', pizza);
+                //console.log('pizza', pizza);
+
+                let ingredienti = '';
+                pizza.ingredients.forEach(ingredient => {
+                    ingredienti +=
+                    `<li>${ingredient.title}</li>`
+                })
                 document.querySelector('.js_post_table').innerHTML +=
-                    `
-                                                    <div class="col-12 col-md-4 p-2">
+                          `
+                            <div class="col-12 col-md-4 p-2">
                                 <div class="card post h-100">
                                   <img src="${pizza.image}" class="card-img-top" alt="...">
                                   <div class="card-body">
                                     <h5 class="card-title">${pizza.name}</h5>
                                     <p class="card-text">${pizza.description}</p>
+                                          <span>Categoria: </span> <p class="card-text">${pizza.category.title}</p>
+                                        <span>Ingredienti: </span>
+                                    <ul>
+                                         ${ingredienti}
+                                    </ul>
                                   </div>
                                 </div>
                             </div>
-                            `;
+                          `;
             });
         }
         }).catch(error => {
