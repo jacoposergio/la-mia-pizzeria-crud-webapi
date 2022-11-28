@@ -37,7 +37,7 @@ namespace la_mia_pizzeria_static.Controllers
             //dependency injection, il controller
             //viene inizializzato con repository adatto alla situazione
             pizzaRepository = _pizzaRepository;
-            //pizzaRepository = new ListPizzeriaRepository();
+
         }
 
         public IActionResult Index()

@@ -15,9 +15,20 @@ namespace la_mia_pizzeria_static.Models.Repositories
             db = new PizzeriaDbContext();
         }
 
-    //diamo al pizzaRepository la responsabilità di recuperare la lista delle pizze, 
-    //possiamo anche riutilizzarlo
-    //è piu sicuro perche siamo sicuri che la funzione restituirà lòa lista delle pizze
+        //diamo al pizzaRepository la responsabilità di recuperare la lista delle pizze, 
+        //possiamo anche riutilizzarlo
+        //è piu sicuro perche siamo sicuri che la funzione restituirà lòa lista delle pizze
+        //public List<Pizza> All()
+        //{
+        //    return AllWithRelations();
+        //}
+
+        //public List<Pizza> AllWithRelations()
+        //{
+        //    return db.Pizze.Include(pizza => pizza.Category).Include(pizza => pizza.Ingredients).ToList();
+        //}
+
+
         public List<Pizza> All()
         {
             return db.Pizze.Include(pizza => pizza.Category).Include(pizza => pizza.Ingredients).ToList();
