@@ -2,6 +2,7 @@
 using la_mia_pizzeria_static.Models.Form;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.SqlServer.Server;
 
 namespace la_mia_pizzeria_static.Models.Repositories
@@ -23,15 +24,16 @@ namespace la_mia_pizzeria_static.Models.Repositories
         //    return AllWithRelations();
         //}
 
-        //public List<Pizza> AllWithRelations()
-        //{
-        //    return db.Pizze.Include(pizza => pizza.Category).Include(pizza => pizza.Ingredients).ToList();
-        //}
+        public List<Pizza> AllWithRelations()
+        {
+            return db.Pizze.Include(pizza => pizza.Category).Include(pizza => pizza.Ingredients).ToList();
+        }
 
 
         public List<Pizza> All()
         {
-            return db.Pizze.Include(pizza => pizza.Category).Include(pizza => pizza.Ingredients).ToList();
+            return AllWithRelations();
+            //return db.Pizze.Include(pizza => pizza.Category).Include(pizza => pizza.Ingredients).ToList();
         }
 
         public Pizza GetById(int id)
@@ -106,6 +108,18 @@ namespace la_mia_pizzeria_static.Models.Repositories
             //ma comunque remove genera delle eccezioni
             db.Pizze.Remove(pizza);
             db.SaveChanges();
+        }
+
+        public List<Pizza> SearchByTitle(string? name)
+        {
+            //iquerable è l'interfaccia che gestisce le query
+            IQueryable<Pizza> query = db.Pizze.Include("Category").Include("Ingredients");
+
+            if (name == null)
+                return query.ToList(); 
+            //se nn trovo i risultati restituiscimeli tutti
+
+            return query.Where(pizza => pizza.Name.ToLower().Contains(name.ToLower())).ToList();
         }
     }
 }

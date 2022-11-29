@@ -12,6 +12,6 @@ namespace la_mia_pizzeria_static.Models.Repositories
         Pizza GetById(int id);
         void Update(Pizza pizza, Pizza formData, List<int>? SelectedIngredients);
         void Delete(Pizza pizza);
-
+        List<Pizza> SearchByTitle(string? name);
     }
 }

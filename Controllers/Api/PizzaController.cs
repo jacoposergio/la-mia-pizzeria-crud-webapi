@@ -25,5 +25,13 @@ namespace la_mia_pizzeria_static.Controllers.Api
             //in questo modo abbiamo recuperato i dati
 
         }
+
+
+        public ActionResult Search(string? name) 
+        {
+            List<Pizza> pizze = _pizzaRepository.SearchByTitle(name);
+            return Ok(pizze);
+
+        }
     }
 }

@@ -5,8 +5,9 @@
 <h2>Le nostre pizze</h2>
 <hr />
 <div>
+    <input id="user_search" type="text" class="js_search form-control" />
     @*bisogna chiamare la funzione: esegui la funzione oninput quando c'è un key press*@
-<input type="text" class="js_search form-control" placeholder="Cerca per titolo..." onkeypress="OnUserInput()"> 
+@*<input type="text" class="js_search form-control" placeholder="Cerca per titolo..." onkeyup="OnUserInput()"> *@
 </div>
 <hr />
 <div class="row js_no_post text-center d-none">
@@ -18,64 +19,91 @@
     <!-- qui verranno mostrati gli elementi -->
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>*@
 
-<script type="text/javascript">
+@section Scripts{
 
-    function OnUserInput(){
-        console.log("l'utente sta inserendo");
-    }
+    <script type="text/javascript">
 
-    axios.get('/api/pizza/get').then(res =>{
-        //se la lunghezza è = a 0, le pizze non esistono
-        if (res.data.length == 0) {   // response ci da tutta la risposta di axios, per lavorare sui nostri dati dobbiamo ragionare su response.data
-            document.querySelector('.js_no_post').classList.remove('d-none');
-            document.querySelector('.js_post_table').classList.add('d-none');
-            
-            //else nascondiamo il post 'non ci sono pizze' e mostriamo gli elementi
-        } else {
-            document.querySelector('.js_post_table').classList.remove('d-none');
-            document.querySelector('.js_no_post').classList.add('d-none');
-            document.querySelector('.js_post_table').innerHTML = '';
-            res.data.forEach(pizza => {
-                //console.log('pizza', pizza);
+        document.querySelector(".js_search").addEventListener('keyup', OnUserInputEvent);
 
-                let ingredienti = '';
-                pizza.ingredients.forEach(ingredient => {
-                    ingredienti +=
-                    `<li>${ingredient.title}</li>`
+        var timeoutId = null;
+        
+        function OnUserInputEvent(e){
+           
+            let query = e.target.value;  //la e è un oggetto che ci da una serie di cose tra cui il terget: l'elemento coinvolto
+     
+            if(timeoutId != null)
+                clearTimeout(timeoutId);
+
+                timeoutId = setTimeout(() => {
+
+                axios.get('/api/pizza/search', {
+                    params: {
+                        name: query
+                    }
+                }).then(response => {
+
+                    RenderPizza(response.data);
+
+                }).catch(error => {
+                    console.log(error);
                 })
-                document.querySelector('.js_post_table').innerHTML +=
-                          `
-                            <div class="col-12 col-md-4 p-2">
-                                <div class="card post h-100">
-                                  <img src="${pizza.image}" class="card-img-top" alt="...">
-                                  <div class="card-body">
-                                    <h5 class="card-title">${pizza.name}</h5>
-                                    <p class="card-text">${pizza.description}</p>
-                                          <span>Categoria: </span> <p class="card-text">${pizza.category.title}</p>
-                                        <span>Ingredienti: </span>
-                                    <ul>
-                                         ${ingredienti}
-                                    </ul>
-                                  </div>
-                                </div>
-                            </div>
-                          `;
-            });
+            
+            }, 5000);
+           
         }
-        }).catch(error => {
-            debugger;
-            console.log(error);
-        })
-
-//</script>
-
-//<script type="text/javascript">
-
-    window.onload = () => {
-        console.log("widow", document.querySelector(".js_search").ariaValueMax);
-    }
 
 
-//</script>
+        axios.get('/api/pizza/get').then(res =>{
+
+                RenderPizza(res.data); //mettiamo .data cosi abbiamo spostato di un figlio la struttura dati, passiamo solo le
+                //info del nostro dominio
+ 
+            }).catch(error => {
+                debugger;
+                console.log(error);
+            });
+
+            function RenderPizza(data){
+                //se la lunghezza è = a 0, le pizze non esistono
+                if (data.length == 0) {   // response ci da tutta la risposta di axios, per lavorare sui nostri dati dobbiamo ragionare su response.data
+                    document.querySelector('.js_no_post').classList.remove('d-none');
+                    document.querySelector('.js_post_table').classList.add('d-none');
+
+                    //else nascondiamo il post 'non ci sono pizze' e mostriamo gli elementi
+                } else {
+                    document.querySelector('.js_post_table').classList.remove('d-none');
+                    document.querySelector('.js_no_post').classList.add('d-none');
+                    document.querySelector('.js_post_table').innerHTML = '';   //senza questa riga avremmo avuto duplicati ogni ricerca, cancella il dom ogni ricerca
+                    document.querySelector('#user_search').innerHTML = ''; 
+                    data.forEach(pizza => {
+                        //console.log('pizza', pizza);
+
+                        let ingredienti = '';
+                        pizza.ingredients.forEach(ingredient => {
+                            ingredienti +=
+                                `<li>${ingredient.title}</li>`
+                        })
+                        document.querySelector('.js_post_table').innerHTML +=
+                            `
+                                        <div class="col-12 col-md-4 p-2">
+                                            <div class="card post h-100">
+                                              <img src="${pizza.image}" class="card-img-top" alt="...">
+                                              <div class="card-body">
+                                                <h5 class="card-title">${pizza.name}</h5>
+                                                <p class="card-text">${pizza.description}</p>
+                                                      <span>Categoria: </span> <p class="card-text">${pizza.category.title}</p>
+                                                    <span>Ingredienti: </span>
+                                                <ul>
+                                                     ${ingredienti}
+                                                </ul>
+                                              </div>
+                                            </div>
+                                        </div>
+                                      `;
+                    });
+                }
+        }
+    </script>
+}

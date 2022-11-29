@@ -31,9 +31,11 @@
             &copy; 2022 - la_mia_pizzeria_static - <a asp-area="" asp-controller="Guest" asp-action="Index">Lista Pizze</a>
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @*quando renderizzi renderbody stampa solo il main e il resto stampalo qui*@
 </body>
 </html>

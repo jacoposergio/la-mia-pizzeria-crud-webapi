@@ -68,5 +68,10 @@ namespace la_mia_pizzeria_static.Models.Repositories
         {
             Pizze.Remove(pizza);
         }
+
+        public List<Pizza> SearchByTitle(string? name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
