@@ -2,6 +2,7 @@
 using la_mia_pizzeria_static.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 
 namespace la_mia_pizzeria_static.Controllers.Api
 {
@@ -26,12 +27,20 @@ namespace la_mia_pizzeria_static.Controllers.Api
 
         }
 
-
         public ActionResult Search(string? name) 
         {
             List<Pizza> pizze = _pizzaRepository.SearchByTitle(name);
             return Ok(pizze);
 
+        }
+
+
+        [HttpGet("{id}")]
+        public IActionResult Details(int id)
+        {
+            Pizza pizza = _pizzaRepository.GetById(id);
+
+            return Ok(pizza);
         }
     }
 }

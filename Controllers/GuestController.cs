@@ -13,5 +13,12 @@ namespace la_mia_pizzeria_static.Controllers
             return View();
         }
 
+          //siccome nel controller del guest ho id posso passarlo col model dentro la lista
+        public IActionResult Details(int id)
+        {
+            ViewData["name"] = "Dettaglio pizza";
+            return View(id);
+        }
+
     }
 }
