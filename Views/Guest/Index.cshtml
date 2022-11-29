@@ -5,7 +5,8 @@
 <h2>Le nostre pizze</h2>
 <hr />
 <div>
-<input type="text" class="js_serach form-control" placeholder="Cerca per titolo...">
+    @*bisogna chiamare la funzione: esegui la funzione oninput quando c'è un key press*@
+<input type="text" class="js_search form-control" placeholder="Cerca per titolo..." onkeypress="OnUserInput()"> 
 </div>
 <hr />
 <div class="row js_no_post text-center d-none">
@@ -20,6 +21,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
 
 <script type="text/javascript">
+
+    function OnUserInput(){
+        console.log("l'utente sta inserendo");
+    }
 
     axios.get('/api/pizza/get').then(res =>{
         //se la lunghezza è = a 0, le pizze non esistono
@@ -64,4 +69,13 @@
             console.log(error);
         })
 
-</script>
+//</script>
+
+//<script type="text/javascript">
+
+    window.onload = () => {
+        console.log("widow", document.querySelector(".js_search").ariaValueMax);
+    }
+
+
+//</script>
