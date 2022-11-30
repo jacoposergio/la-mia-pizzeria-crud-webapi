@@ -10,10 +10,10 @@ namespace la_mia_pizzeria_static.Controllers.Api
     [ApiController]
     public class MessageController : ControllerBase
     {
-        private PizzeriaDbContext db;
-        public MessageController(PizzeriaDbContext _db)
+        PizzeriaDbContext db;
+        public MessageController()
         {
-            db = _db;
+            db = new PizzeriaDbContext();
         } 
 
         [HttpPost]

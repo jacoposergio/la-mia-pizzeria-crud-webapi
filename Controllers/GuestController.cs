@@ -22,7 +22,7 @@ namespace la_mia_pizzeria_static.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["title"] = "Contact";
+            ViewData["title"] = "Contattaci";
             return View();
         }
 

@@ -11,6 +11,14 @@ namespace la_mia_pizzeria_static.Models.Repositories
     {
         private PizzeriaDbContext db;
 
+
+        //public DbPizzeriaRepository(PizzeriaDbContext _db)
+        //{
+        //    db = _db;
+        //}
+
+
+
         public DbPizzeriaRepository()
         {
             db = new PizzeriaDbContext();
