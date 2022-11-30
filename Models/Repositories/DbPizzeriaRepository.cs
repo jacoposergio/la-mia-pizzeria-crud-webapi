@@ -68,7 +68,7 @@ namespace la_mia_pizzeria_static.Models.Repositories
             db.SaveChanges();
         }
 
-        ///Ppippa pizza è il post del db, Pizza formData è il post del form
+        ///Pizza pizza è il post del db, Pizza formData è il post del form
         public void Update(Pizza pizza, Pizza formData, List<int>? SelectedIngredients)
         {
 
