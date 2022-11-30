@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace la_mia_pizzeria_static.Controllers.Api
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")] //non obbligo piu a darmi una action ma solo a darmi un controller, c# pensa alla action
     [ApiController]
     public class PizzaController : ControllerBase
     {
@@ -16,27 +16,32 @@ namespace la_mia_pizzeria_static.Controllers.Api
         {
             _pizzaRepository = pizzaRepository;
         }
-        public ActionResult Get() //get va a recuperare le nostre pizze
-        {
-            List<Pizza> pizze = _pizzaRepository.All(); //lavora sui model, quindi sui dati 
-            return Ok(pizze);   //restituisce json nella response body con codice 200
-            
-            
-            //le funzioni di restituzione convertono automaticamente in Json
-            //in questo modo abbiamo recuperato i dati
+        //public ActionResult Get() //get va a recuperare le nostre pizze
+        //{
+        //    List<Pizza> pizze = _pizzaRepository.All(); //lavora sui model, quindi sui dati 
+        //    return Ok(pizze);   //restituisce json nella response body con codice 200
 
-        }
 
-        public ActionResult Search(string? name) 
+        //    //le funzioni di restituzione convertono automaticamente in Json
+        //    //in questo modo abbiamo recuperato i dati
+
+        //}
+
+
+        //ora prende le funzione non tramite nome ma protocollo httpget, il nome nn serve più
+        // api/post
+        // api/pizza?name=[query]
+        [HttpGet]
+        public ActionResult Get(string? name) 
         {
             List<Pizza> pizze = _pizzaRepository.SearchByTitle(name);
             return Ok(pizze);
 
         }
 
-
+        // api/pizza/[id]
         [HttpGet("{id}")]
-        public IActionResult Details(int id)
+        public IActionResult Get(int id)
         {
             Pizza pizza = _pizzaRepository.GetById(id);
 

@@ -21,7 +21,7 @@
     <script type="text/javascript">
 
       
-        axios.get(`/api/pizza/details/${@Model}`).then(res => {
+        axios.get(`/api/pizza/${@Model}`).then(res => {
             const pizza = res.data;
             let ingredienti = '';
             pizza.ingredients.forEach(ingredient => {

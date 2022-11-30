@@ -38,7 +38,7 @@
 
                 timeoutId = setTimeout(() => {
 
-                axios.get('/api/pizza/search', {
+                axios.get('/api/pizza', {
                     params: {
                         name: query
                     }
@@ -55,7 +55,7 @@
         }
 
 
-        axios.get('/api/pizza/get').then(res =>{
+        axios.get('/api/pizza').then(res =>{
 
                 RenderPizza(res.data); //mettiamo .data cosi abbiamo spostato di un figlio la struttura dati, passiamo solo le
                 //info del nostro dominio
