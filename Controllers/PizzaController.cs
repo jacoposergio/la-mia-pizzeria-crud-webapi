@@ -14,10 +14,11 @@ using System.Diagnostics;
 
 namespace la_mia_pizzeria_static.Controllers
 {
+    [Route("[controller]/[action]/{id?}", Order = 0)]
     public class PizzaController : Controller
     {
 
-        public PizzeriaDbContext db;
+        PizzeriaDbContext db;
 
         //Uso il repository al posto del db
         //DbPizzeriaRepository pizzaRepository;
@@ -30,7 +31,7 @@ namespace la_mia_pizzeria_static.Controllers
 
         IPizzeriaRepository pizzaRepository;   // 2 classi che non hanno vincolo di ereditarietà che implementano entrambi l'interfaccia
         // con la stessa aria di memoria posso avere 2 comportamenti diversi, uno sulla lista , uno sul db
-        public PizzaController(IPizzeriaRepository _pizzaRepository,PizzeriaDbContext _db ) : base() 
+        public PizzaController(IPizzeriaRepository _pizzaRepository, PizzeriaDbContext _db ) : base() 
         {
             //db = new PizzeriaDbContext();
             db = _db;

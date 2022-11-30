@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace la_mia_pizzeria_static.Controllers.Api
 {
-    [Route("api/[controller]",Order = 1)] //non obbligo piu a darmi una action ma solo a darmi un controller, c# pensa alla action
+    [Route("api/[controller]", Order = 1)] //non obbligo piu a darmi una action ma solo a darmi un controller, c# pensa alla action
     [ApiController]
     public class PizzaController : ControllerBase
     {
@@ -32,7 +32,7 @@ namespace la_mia_pizzeria_static.Controllers.Api
         // api/post
         // api/pizza?name=[query]
         [HttpGet]
-        public ActionResult Get(string? name) 
+        public ActionResult Get(string? name)
         {
             List<Pizza> pizze = _pizzaRepository.SearchByTitle(name);
             return Ok(pizze);
@@ -48,11 +48,5 @@ namespace la_mia_pizzeria_static.Controllers.Api
             return Ok(pizza);
         }
 
-        // /api/post
-        [HttpPost]
-        public IActionResult Update(Pizza pizza)
-        {
-            return Ok("ok");
-        }
     }
 }

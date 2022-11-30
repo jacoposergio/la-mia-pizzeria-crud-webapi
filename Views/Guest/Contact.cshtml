@@ -36,9 +36,9 @@
             axios.post('/api/message', {
                 //recupero i dati con il queryselector e passo dati veri e propri
                 email: document.querySelector('#contact-email').value,
-                name: document.querySelector('#contact-name').value,
-                title: document.querySelector('#contact-title').value,
-                text: document.querySelector('#contact-text').value,
+                guestName: document.querySelector('#contact-name').value,
+                messageTitle: document.querySelector('#contact-title').value,
+                messageText: document.querySelector('#contact-text').value,
             }).then(res => {
                 alert("Messaggio inserito correttamente!", "success");
                 document.querySelector('#contact-title').value = '';
