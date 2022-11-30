@@ -20,5 +20,11 @@ namespace la_mia_pizzeria_static.Controllers
             return View(id);
         }
 
+        public IActionResult Contact()
+        {
+            ViewData["title"] = "Contact";
+            return View();
+        }
+
     }
 }
