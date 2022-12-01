@@ -3,6 +3,7 @@ using la_mia_pizzeria_static.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using la_mia_pizzeria_static.Data;
 
 namespace la_mia_pizzeria_static.Controllers.Api
 {
@@ -12,21 +13,11 @@ namespace la_mia_pizzeria_static.Controllers.Api
     {
         IPizzeriaRepository _pizzaRepository;
 
-        public PizzaController(IPizzeriaRepository pizzaRepository) //diciamo al controller come si deve inizializzare
+        public PizzaController(IPizzeriaRepository pizzaRepository)
         {
             _pizzaRepository = pizzaRepository;
         }
-        //public ActionResult Get() //get va a recuperare le nostre pizze
-        //{
-        //    List<Pizza> pizze = _pizzaRepository.All(); //lavora sui model, quindi sui dati 
-        //    return Ok(pizze);   //restituisce json nella response body con codice 200
-
-
-        //    //le funzioni di restituzione convertono automaticamente in Json
-        //    //in questo modo abbiamo recuperato i dati
-
-        //}
-
+        
 
         //ora prende le funzione non tramite nome ma protocollo httpget, il nome nn serve più
         // api/post

@@ -3,6 +3,7 @@ using la_mia_pizzeria_static.Data;
 using la_mia_pizzeria_static.Models;
 using la_mia_pizzeria_static.Models.Form;
 using la_mia_pizzeria_static.Models.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,31 +15,19 @@ using System.Diagnostics;
 
 namespace la_mia_pizzeria_static.Controllers
 {
+    [Authorize]
     //[Route("[controller]/[action]/{id?}", Order = 0)]
     public class PizzaController : Controller
     {
 
-        PizzeriaDbContext db;
+        public PizzeriaDbContext db; 
 
-        //Uso il repository al posto del db
-        //DbPizzeriaRepository pizzaRepository;
-        //public PizzaController() : base()
-        //{
-        //    db = new PizzeriaDbContext();
-
-        //    pizzaRepository = new DbPizzeriaRepository();
-        //}
-
-        IPizzeriaRepository pizzaRepository;   // 2 classi che non hanno vincolo di ereditarietà che implementano entrambi l'interfaccia
-        // con la stessa aria di memoria posso avere 2 comportamenti diversi, uno sulla lista , uno sul db
-        public PizzaController(IPizzeriaRepository _pizzaRepository ) : base() 
+        IPizzeriaRepository pizzaRepository;  
+        public PizzaController(IPizzeriaRepository _pizzaRepository, PizzeriaDbContext _db ) : base() 
         {
-            db = new PizzeriaDbContext();
-
-
-            //dependency injection, il controller
-            //viene inizializzato con repository adatto alla situazione
+            //db = new PizzeriaDbContext();
             pizzaRepository = _pizzaRepository;
+            db = _db;
 
         }
 

@@ -12,16 +12,11 @@ namespace la_mia_pizzeria_static.Models.Repositories
         private PizzeriaDbContext db;
 
 
-        //public DbPizzeriaRepository(PizzeriaDbContext _db)
-        //{
-        //    db = _db;
-        //}
 
-
-
-        public DbPizzeriaRepository()
+        public DbPizzeriaRepository(PizzeriaDbContext _db)
         {
-            db = new PizzeriaDbContext();
+ 
+            db = _db;
         }
 
         //diamo al pizzaRepository la responsabilità di recuperare la lista delle pizze, 
